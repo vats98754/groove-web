@@ -33,4 +33,5 @@ def upload(filename):
     return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 if __name__ == '__main__':
+    # Replace the 127.0.0.1 below with the appropriate host, if not hosted locally
     app.run(host='127.0.0.1', port=5000, debug=True, threaded=False)
