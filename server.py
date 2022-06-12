@@ -15,7 +15,11 @@ def split(filename):
 def index():
    files = os.listdir(app.config['UPLOAD_PATH'])
    return render_template('index.html')
-	
+
+@app.route('/uploads/<filename>')
+def upload(filename):
+    return send_from_directory(app.config['UPLOAD_PATH'], filename)
+
 @app.route('/', methods = ['POST'])
 def upload_files():
     uploaded_file = request.files['file']
@@ -27,10 +31,6 @@ def upload_files():
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
         split(filename)
     return '', 204
-
-@app.route('/uploads/<filename>')
-def upload(filename):
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 if __name__ == '__main__':
     # Replace the 127.0.0.1 below with the appropriate host, if not hosted locally
